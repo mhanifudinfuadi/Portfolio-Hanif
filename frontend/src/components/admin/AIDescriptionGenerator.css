@@ -1,0 +1,366 @@
+.ai-generator-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ai-generator-modal {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 1000px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.ai-generator-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 32px;
+  border-bottom: 1px solid #e5e5e5;
+  background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+}
+
+.ai-generator-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.ai-close-btn {
+  background: none;
+  border: none;
+  font-size: 32px;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.ai-close-btn:hover {
+  background: #f5f5f5;
+  color: #1a1a1a;
+}
+
+.ai-generator-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  padding: 32px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.ai-form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ai-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ai-form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  letter-spacing: 0.3px;
+}
+
+.ai-form-group input,
+.ai-form-group select,
+.ai-form-group textarea {
+  padding: 12px 16px;
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #1a1a1a;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.ai-form-group input:focus,
+.ai-form-group select:focus,
+.ai-form-group textarea:focus {
+  outline: none;
+  border-color: #1a1a1a;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+.ai-form-group input:disabled,
+.ai-form-group select:disabled,
+.ai-form-group textarea:disabled {
+  background: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.ai-form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.ai-tone-options {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ai-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: 2px solid #e5e5e5;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+}
+
+.ai-radio-label:hover {
+  border-color: #ccc;
+}
+
+.ai-radio-label input[type="radio"] {
+  margin: 0;
+  cursor: pointer;
+}
+
+.ai-radio-label input[type="radio"]:checked + span {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.ai-radio-label:has(input:checked) {
+  border-color: #1a1a1a;
+  background: #f8f8f8;
+}
+
+.ai-form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.ai-generate-btn,
+.ai-reset-btn {
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.ai-generate-btn {
+  background: #1a1a1a;
+  color: #ffffff;
+  flex: 1;
+}
+
+.ai-generate-btn:hover:not(:disabled) {
+  background: #333;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.ai-generate-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.ai-reset-btn {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.ai-reset-btn:hover:not(:disabled) {
+  background: #e5e5e5;
+  color: #1a1a1a;
+}
+
+.ai-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ai-output-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ai-output-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ai-output-header label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  letter-spacing: 0.3px;
+}
+
+.ai-copy-btn {
+  padding: 8px 16px;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ai-copy-btn:hover {
+  background: #e5e5e5;
+  color: #1a1a1a;
+}
+
+.ai-output-box {
+  flex: 1;
+  padding: 24px;
+  background: #fafafa;
+  border: 2px solid #e5e5e5;
+  border-radius: 12px;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-generated-text {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #1a1a1a;
+  margin: 0;
+  font-family: 'Georgia', serif;
+  white-space: pre-wrap;
+}
+
+.ai-placeholder {
+  font-size: 15px;
+  color: #999;
+  text-align: center;
+  margin: 0;
+}
+
+.ai-error {
+  color: #d32f2f;
+  font-size: 14px;
+  padding: 16px;
+  background: #ffebee;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.ai-generator-footer {
+  padding: 16px 32px;
+  border-top: 1px solid #e5e5e5;
+  background: #f8f8f8;
+  text-align: center;
+}
+
+.ai-footer-note {
+  font-size: 12px;
+  color: #999;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ai-generator-modal {
+    width: 95%;
+    max-height: 95vh;
+  }
+
+  .ai-generator-content {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px;
+  }
+
+  .ai-generator-header {
+    padding: 20px 24px;
+  }
+
+  .ai-generator-header h2 {
+    font-size: 20px;
+  }
+
+  .ai-form-actions {
+    flex-direction: column;
+  }
+
+  .ai-tone-options {
+    flex-direction: column;
+  }
+
+  .ai-radio-label {
+    width: 100%;
+    justify-content: center;
+  }
+}

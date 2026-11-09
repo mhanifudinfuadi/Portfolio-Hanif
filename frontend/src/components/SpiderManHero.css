@@ -1,0 +1,48 @@
+.spiderman-hero {
+  min-height: 100vh;
+  background: #000000;
+  color: white;
+  position: relative;
+  overflow: visible;
+  width: 100%;
+  padding: 0 40px 0 40px; /* bottom padding handled by story-section */
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.spiderman-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(220, 38, 127, 0.1) 0%, rgba(0, 0, 0, 0.8) 70%);
+  pointer-events: none;
+}
+
+/* Ensure full viewport background is black */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000000;
+  z-index: -1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .spiderman-hero {
+    padding: 0 32px 32px 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .spiderman-hero {
+    padding: 0 24px 24px 24px;
+  }
+}

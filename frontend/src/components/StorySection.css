@@ -1,0 +1,225 @@
+.story-section {
+  position: relative;
+  padding: 0 0 40px 0; /* only bottom padding */
+  z-index: 10;
+  font-family: 'Inter', sans-serif;
+  margin-top: auto; /* push to bottom within flex parent */
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  opacity: 0; /* page-load start */
+  transform: translateY(12px); /* subtle slide from bottom */
+}
+
+/* Activate on page load */
+body.page-loaded .story-section {
+  opacity: 1;
+  transform: none;
+}
+
+.story-content {
+  display: grid;
+  grid-template-columns: 372px 1fr;
+  align-items: end;
+  gap: 4rem;
+}
+
+/* place CTA and image at far right */
+.cta-container {
+  justify-self: end;
+}
+
+.story-text {
+  flex: 1;
+  max-width: 372px;
+}
+
+.story-title {
+  font-size: 20px; /* requested size */
+  font-weight: 600; /* requested weight */
+  color: #dc2626;
+  margin-bottom: 12px; /* smaller since underline removed */
+  letter-spacing: 0.1em; /* updated kerning */
+  text-transform: uppercase;
+}
+
+.story-description {
+  font-size: 16px; /* requested */
+  line-height: 22px; /* requested */
+  color: #bbb;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0; /* neutralize */
+}
+
+.cta-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+}
+
+.cta-right-cluster {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0; /* remove built-in gap */
+}
+
+.circle-count {
+  width: 44px;
+  height: 44px;
+  border: 2px solid #dc2626;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-21deg); /* 21 degrees left */
+  position: relative;
+  z-index: 1; /* behind the image */
+}
+
+.count-text {
+  color: #dc2626;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.circle-image-placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #111;
+  background-image: url('https://customer-assets.emergentagent.com/job_github-clone-14/artifacts/8ovpseaw_image%206344779.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  transform: rotate(14deg); /* 14 degrees right */
+  margin-left: -12px; /* overlap the 01 circle by 12px */
+  position: relative;
+  z-index: 2; /* ensure it sits on top of the 01 circle */
+}
+
+.book-now-btn {
+  background: transparent;
+  border: 2px solid #dc2626;
+  border-radius: 50px;
+  padding: 0.8rem 2rem 0.8rem 1.5rem; /* restore original padding */
+  font-size: 18px;
+  font-weight: 700;
+  color: #dc2626;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: 0 0 0 rgba(220, 38, 38, 0);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-arrow {
+  transform: rotate(318deg);
+  transform-origin: center;
+  width: 16px;
+  height: 16px;
+}
+
+.book-now-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.book-now-btn:hover::before {
+  left: 100%;
+}
+
+.book-now-btn:hover,
+.book-now-btn.hovered {
+  background: linear-gradient(45deg, #dc2626, #991b1b);
+  border-color: #dc2626;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(220, 38, 38, 0.5);
+}
+
+.btn-text {
+  position: relative;
+  z-index: 2;
+}
+
+.btn-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+}
+
+.book-now-btn:hover .btn-glow,
+.book-now-btn.hovered .btn-glow {
+  width: 100px;
+  height: 100px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .story-content {
+    display: flex; /* override grid on small screens */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .cta-container { justify-content: center; }
+  
+  .story-text {
+    max-width: 100%;
+  }
+  
+  .story-title {
+    font-size: 14px;
+  }
+  
+  .story-description {
+    font-size: 11px;
+  }
+  
+  .book-now-btn {
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .story-section {
+    padding: 1.5rem 0;
+  }
+  
+  .story-title {
+    font-size: 13px;
+  }
+  
+  .story-description {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  
+  .book-now-btn {
+    padding: 0.8rem 2rem;
+    font-size: 0.9rem;
+  }
+}

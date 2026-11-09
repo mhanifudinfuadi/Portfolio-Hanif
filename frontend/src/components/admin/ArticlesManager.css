@@ -1,0 +1,19 @@
+.articles-manager { margin-top: 48px; padding: 32px; color: #fff; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); border-radius: 14px; }
+.articles-manager h2 { margin: 0 0 8px; font-size: 26px; }
+.articles-manager > p { color: rgba(255,255,255,.7); }
+.article-editor { display: grid; gap: 16px; max-width: 820px; margin: 24px 0 40px; }
+.article-editor label { display: grid; gap: 8px; font-size: 14px; color: rgba(255,255,255,.82); }
+.article-editor input:not([type="checkbox"]), .article-editor textarea { width: 100%; box-sizing: border-box; padding: 12px 14px; color: white; background: rgba(0,0,0,.22); border: 1px solid rgba(255,255,255,.2); border-radius: 7px; font: inherit; }
+.article-editor input[type="file"] { padding: 9px; }
+.article-editor textarea { resize: vertical; line-height: 1.55; }
+.article-publish-toggle { display: flex !important; align-items: center; gap: 10px !important; }
+.article-editor-preview { width: min(100%, 360px); max-height: 200px; object-fit: cover; border-radius: 8px; }
+.article-editor-actions, .managed-article-actions { display: flex; gap: 10px; }
+.article-editor-actions button { width: auto; }
+.article-cancel-btn, .managed-article-actions button { padding: 10px 14px; color: #fff; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 7px; cursor: pointer; }
+.managed-articles { display: grid; gap: 10px; margin-top: 16px; }
+.managed-article { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 16px; border: 1px solid rgba(255,255,255,.12); border-radius: 8px; }
+.managed-article > div:first-child { display: grid; gap: 5px; }
+.managed-article span, .article-manager-message { color: rgba(255,255,255,.65); font-size: 13px; }
+.managed-article-actions button:last-child { color: #ffb4b4; }
+@media (max-width: 600px) { .articles-manager { padding: 20px; } .managed-article { align-items: flex-start; flex-direction: column; } }

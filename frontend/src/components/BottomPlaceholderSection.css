@@ -1,0 +1,17 @@
+.bottom-placeholder { background: transparent; padding: 0; margin-top: 24px; }
+.bp-wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: flex; justify-content: center; }
+.img-placeholder { position: relative; width: 554px; height: 426px; box-sizing: content-box; border: none; border-radius: 16px; display: block; overflow: hidden; background: none; margin-bottom: 0; isolation: isolate; }
+/* The interactive image will be shown by the floating red box; the static background is removed */
+.img-placeholder span { letter-spacing: 0.05em; }
+
+/* Ensure the placeholder sits flush with the very bottom */
+.bottom-placeholder { position: relative; }
+.bottom-placeholder::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 0; }
+
+/* Anchor to guide the floating red box target */
+.red-target-anchor { position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; transform: translate(-50%, -50%); pointer-events: none; opacity: 0; }
+
+@media (max-width: 600px) {
+  .bp-wrap { padding: 0 24px; }
+  .img-placeholder { width: 90vw; height: calc(90vw * 0.769); }
+}

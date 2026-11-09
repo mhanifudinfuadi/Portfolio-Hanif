@@ -1,0 +1,29 @@
+.dp-poster { background: transparent; color: #111; padding: 0 0 0 0; }
+.dp-wrap { position: relative; max-width: 1100px; margin: 0 auto; padding: 0 40px; text-align: center; }
+
+/* Remove internal halo; now handled globally by WhiteStage */
+.dp-wrap::before { content: none; }
+
+.dp-kicker { font-size: 12px; letter-spacing: 0.28em; color: #666; margin-bottom: 4px; text-transform: uppercase; }
+.dp-title { font-family: 'Bebas Neue', sans-serif; font-weight: 800; letter-spacing: 0.01em; font-size: clamp(48px, 12vw, 128px); line-height: 0.9; margin: 0 auto; }
+
+/* Left/Right meta aligned with headline area */
+.dp-meta { position: relative; max-width: 1000px; margin: 0 auto; }
+.dp-meta .left, .dp-meta .right { position: absolute; top: 0; font-size: 18px; font-weight: 700; letter-spacing: 0.05em; }
+.dp-meta .left { left: 0; }
+.dp-meta .right { right: 0; }
+
+/* Hidden mid anchor visualization */
+.red-mid-anchor { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+
+/* Reveal */
+.dp-wrap { opacity: 0; transform: translateY(20px); transition: opacity 400ms ease, transform 400ms ease; }
+.dp-wrap.active { opacity: 1; transform: none; }
+
+/* Responsive fine tuning */
+@media (max-width: 780px) {
+  .dp-meta .left, .dp-meta .right { font-size: 14px; }
+}
+@media (max-width: 480px) {
+  .dp-wrap { padding: 0 24px; }
+}

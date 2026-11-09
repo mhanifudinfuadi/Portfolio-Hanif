@@ -1,0 +1,164 @@
+.journal-section {
+  padding: 120px 40px;
+  background: #fafafa;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.journal-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.journal-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.journal-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.journal-title {
+  font-family: 'Georgia', serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 400;
+  color: #1a1a1a;
+  margin: 0 0 16px 0;
+}
+
+.journal-description {
+  font-size: 17px;
+  color: #777;
+  margin: 0;
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 40px;
+}
+
+.article-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #e5e5e5;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+  transition: all 0.3s ease;
+}
+
+.journal-section.visible .article-card {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.article-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  border-color: #d5d5d5;
+}
+
+.article-image-wrapper {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.article-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.article-card:hover .article-image {
+  transform: scale(1.05);
+}
+
+.article-content {
+  padding: 32px;
+}
+
+.article-label {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 12px;
+}
+
+.article-title {
+  font-family: 'Georgia', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: #1a1a1a;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+}
+
+.article-description {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #666;
+  margin: 0 0 20px 0;
+}
+
+.article-link {
+  display: inline-block;
+  color: #1a1a1a;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid transparent;
+  background: none;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  padding: 0 0 3px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.article-link:hover {
+  border-bottom-color: #1a1a1a;
+}
+
+.journal-empty { text-align: center; color: #777; padding: 24px 0; }
+.article-modal-backdrop { position: fixed; inset: 0; z-index: 2000; display: grid; place-items: center; padding: 24px; background: rgba(12, 12, 18, .72); }
+.article-modal { position: relative; width: min(760px, 100%); max-height: 85vh; overflow: auto; box-sizing: border-box; padding: 48px; background: #fff; border-radius: 14px; color: #222; }
+.article-modal h2 { font-family: Georgia, serif; font-size: clamp(28px, 4vw, 40px); font-weight: 400; line-height: 1.2; }
+.article-modal > img { width: 100%; max-height: 360px; object-fit: cover; border-radius: 8px; }
+.article-modal-body { white-space: pre-wrap; font-size: 16px; line-height: 1.8; color: #555; }
+.article-modal-close { position: absolute; top: 12px; right: 18px; border: 0; background: transparent; font-size: 32px; cursor: pointer; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .journal-section {
+    padding: 80px 24px;
+  }
+  
+  .articles-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .article-content {
+    padding: 24px;
+  }
+  .article-modal { padding: 36px 24px 24px; }
+}

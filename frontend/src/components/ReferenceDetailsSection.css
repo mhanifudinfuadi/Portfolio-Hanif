@@ -1,0 +1,245 @@
+.cine-details {
+  position: relative;
+  background: transparent;
+  color: #111;
+  padding: 48px 0 160px 0;
+  overflow: visible;
+}
+
+.details-wrap {
+  --section-hpad: 40px;
+  padding: 0 var(--section-hpad);
+  max-width: 1440px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* subtle radial circles like reference */
+.cine-details::before { content: none; }
+
+.top-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.marker { font-size: 16px; letter-spacing: 0.2em; color: #222; }
+.with-avatars { display: flex; align-items: center; gap: 16px; }
+.avatars { display: flex; gap: 6px; margin-left: 8px; }
+.avatar { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, #a00, #300); box-shadow: 0 2px 8px rgba(0,0,0,0.2); border: 2px solid #fff; }
+
+/* scale reveal for headline and markers */
+.scale-reveal { opacity: 0; transform: scale(0.92); will-change: transform, opacity; transform-origin: center; }
+.scale-reveal.in { opacity: 1; transform: scale(1); transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1), opacity 420ms ease; }
+
+/* pop reveal for avatars and right image */
+.pop-reveal { opacity: 0; transform: scale(0.85); will-change: transform, opacity; transform-origin: center; }
+.pop-reveal.in { opacity: 1; animation: popIn 560ms cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+@keyframes popIn { 0% { transform: scale(0.85); opacity: 0; } 70% { transform: scale(1.04); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+
+.details-title {
+  text-align: center;
+  font-size: 40px;
+  letter-spacing: 0.02em;
+  font-weight: 700;
+  margin: 10px auto 12px auto;
+  max-width: 640px;
+}
+
+/* Media row: left avatars, center vertical arrows, right 120px image */
+.details-media-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; margin: 8px 0 24px 0; }
+.media-left { display: flex; justify-content: flex-start; }
+.avatar-group { display: flex; gap: 8px; }
+.avatar-lg { width: 40px; height: 40px; border-radius: 50%; overflow: hidden; box-shadow: 0 6px 18px rgba(0,0,0,0.25); border: 2px solid #fff; background: #111; }
+.avatar-lg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.media-center { display: flex; justify-content: center; }
+.media-right { display: flex; justify-content: flex-end; }
+.right-disc { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; box-shadow: 0 10px 28px rgba(0,0,0,0.25); border: 3px solid #111; }
+
+/* Vertical arrow column */
+.arrow-stack { display: grid; grid-auto-flow: row; justify-items: center; gap: 8px; }
+.v-arrow { width: 2px; height: 44px; background: #111; position: relative; }
+.v-arrow.left::after { content: ''; position: absolute; bottom: -6px; left: -5px; width: 12px; height: 12px; border-left: 2px solid #111; border-bottom: 2px solid #111; transform: rotate(45deg); }
+.v-arrow.right { background: #c00; }
+.v-arrow.right::after { content: ''; position: absolute; top: -6px; right: -5px; width: 12px; height: 12px; border-right: 2px solid #c00; border-top: 2px solid #c00; transform: rotate(45deg); }
+
+/* Horizontal arrows under the headline (style only here) */
+.h-arrow { position: relative; width: 64px; height: 2px; background: #2b2b2b; }
+.h-arrow + .h-arrow { margin-top: 12px; }
+.h-arrow.right { background: #b91c1c; }
+.h-arrow.left { background: #2b2b2b; }
+.h-arrow.right::after { content: ""; position: absolute; right: -8px; top: -3px; width: 10px; height: 10px; border-right: 2px solid #b91c1c; border-top: 2px solid #b91c1c; transform: rotate(45deg); }
+.h-arrow.left::after { content: ""; position: absolute; left: -8px; top: -3px; width: 10px; height: 10px; border-left: 2px solid #2b2b2b; border-bottom: 2px solid #2b2b2b; transform: rotate(45deg); }
+/* Nudge the group slightly below the title visually */
+.details-media-row { margin-top: 16px; }
+
+/* Grid below */
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.kicker { font-size: 18px; letter-spacing: 0; color: #b91c1c; margin-bottom: 10px; }
+.copy { font-size: 16px; line-height: 22px; color: #333; max-width: 356px; margin: 0; }
+
+/* Simple media images without background or clipping */
+.media-image { margin-top: 24px; width: 200px; height: 240px; }
+.media-image img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 12px; }
+
+
+.film-card {
+  --card-w: 296px;
+  --card-h: 416px;
+  --tile-gap: 12px;
+  --big-h: 132px;
+  --small-h: 78px;
+
+  background: #111;
+  color: #fff;
+  border-radius: 28px;
+  padding: 20px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+  max-width: var(--card-w);
+  width: var(--card-w);
+  height: var(--card-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 auto;
+}
+.film-head { font-size: 12px; letter-spacing: 0.24em; color: #bbb; margin-bottom: 8px; text-align: left; }
+.film-title { font-size: 32px; letter-spacing: 0.02em; font-weight: 800; margin: 2px 0 16px 0; text-align: left; }
+
+/* Tile grid replicating reference layout: 2 big tiles then 2 small tiles */
+.tile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--tile-gap); margin-bottom: 14px; }
+.tile { background: #1a1a1a; border-radius: 20px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04), 0 10px 40px rgba(0,0,0,0.35); position: relative; overflow: hidden; padding: 12px; display: flex; align-items: flex-end; }
+.tile.big { height: var(--big-h); }
+.tile.small { height: var(--small-h); }
+
+/* Map tile */
+.map-tile { background: radial-gradient(120px 80px at 50% 40%, rgba(255,255,255,0.05), rgba(0,0,0,0.02)), #1a1a1a; }
+.map-pin { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 22px; height: 22px; border-radius: 50%; border: 2px solid #fff; }
+.tile-label { font-size: 12px; letter-spacing: 0.2em; color: #ddd; opacity: 0.85; }
+
+/* Cinema tile */
+.cinema-tile { background: #1e1e1e; align-items: center; justify-content: center; text-align: center; }
+.tile-kicker { font-size: 12px; letter-spacing: 0.2em; color: #bbb; margin-bottom: 6px; }
+.tile-strong { font-size: 18px; line-height: 1.1; font-weight: 800; letter-spacing: 0.02em; }
+
+/* Film card scoped updates per request */
+.film-card .tile { border-radius: 24px; }
+
+/* Map tile: use provided map image */
+.film-card .map-tile {
+  background: #1a1a1a;
+  background-image: url('https://customer-assets.emergentagent.com/job_webui-transformation/artifacts/i0kod2d9_image%206344906.png');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Cinema tile: stack label and value vertically */
+.film-card .cinema-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 6px;
+}
+
+/* DATE & TIME tiles: vertical stack and centered like cinema */
+.film-card .tile.small {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 4px;
+}
+.film-card .tile.small .small-label,
+.film-card .tile.small .small-value {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+/* Letter-spacing for values */
+.film-card .tile-strong,
+.film-card .small-value { letter-spacing: 0.1em; }
+
+.film-card .tile.small .small-label { margin-bottom: 0; }
+
+
+/* Small tiles */
+.small-label { font-size: 12px; letter-spacing: 0.2em; color: #bbb; margin-bottom: 6px; }
+.small-value { font-size: 18px; font-weight: 800; }
+
+/* CTA full width bottom bar */
+.book-cta { margin-top: auto; background: #b91c1c; color: #fff; border: none; border-radius: 999px; height: 48px; padding: 0 16px; font-size: 14px; font-weight: 800; letter-spacing: 0.06em; display: flex; align-items: center; justify-content: space-between; width: 100%; box-shadow: 0 8px 24px rgba(185, 28, 28, 0.6); cursor: pointer; }
+.book-cta .cta-arrow { font-weight: 800; }
+.book-cta:hover { filter: brightness(1.05); }
+
+/* Scroll choreography anchors */
+.red-origin-anchor { position: absolute; left: 50%; bottom: 60px; width: 10px; height: 10px; transform: translateX(-50%); pointer-events: none; opacity: 0; }
+
+/* Deadpool cutout placeholder overlapping bottom (hidden, replaced by floating overlay) */
+.dp-cutout { display: none; }
+
+
+/* ===== Film card final overrides (scoped safely) ===== */
+.film-card .tile { border-radius: 24px !important; }
+.film-card .map-tile {
+  background: #1a1a1a !important;
+  background-image: url('https://customer-assets.emergentagent.com/job_webui-transformation/artifacts/i0kod2d9_image%206344906.png') !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+.film-card .cinema-tile {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 6px !important;
+}
+.film-card .tile.small {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 4px !important;
+}
+.film-card .tile.small .small-label,
+.film-card .tile.small .small-value {
+  display: block !important;
+  width: 100% !important;
+  text-align: center !important;
+  margin: 0 !important;
+}
+.film-card .tile-strong,
+.film-card .small-value { letter-spacing: 0.1em !important; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .scale-reveal, .scale-reveal.in { transition: none !important; transform: none !important; opacity: 1 !important; }
+  .pop-reveal, .pop-reveal.in { animation: none !important; transform: none !important; opacity: 1 !important; }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .details-wrap { --section-hpad: 32px; }
+  .details-grid { grid-template-columns: 1fr; }
+  .film-card { margin: 0 auto; max-width: 520px; }
+  .copy { max-width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .details-wrap { --section-hpad: 24px; }
+  .avatar-lg { width: 32px; height: 32px; }
+  .right-disc { width: 80px; height: 80px; }
+  .film-title { font-size: 22px; }
+}

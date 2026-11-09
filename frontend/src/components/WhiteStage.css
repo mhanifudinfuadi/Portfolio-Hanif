@@ -1,0 +1,21 @@
+.white-stage { position: relative; background: #ffffff; }
+.white-stage-content { position: relative; z-index: 3; }
+
+/* Fixed overlay that stays in place while white-stage is in view */
+.white-halo { position: fixed; inset: 0; z-index: 2; pointer-events: none; opacity: 0; transition: opacity 250ms ease; }
+.white-halo.visible { opacity: 1; }
+
+/* Crosshair lines */
+.wh-line { position: absolute; background: rgba(0,0,0,0.08); }
+.wh-line.h { height: 1px; width: 100vw; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.wh-line.v { width: 1px; height: 100vh; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+
+/* 816px circle centered */
+.wh-circle { position: absolute; width: 816px; height: 816px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.08); left: 50%; top: 50%; transform: translate(-50%, -50%); }
+
+@media (max-width: 900px) {
+  .wh-circle { width: 680px; height: 680px; }
+}
+@media (max-width: 560px) {
+  .wh-circle { width: 520px; height: 520px; }
+}

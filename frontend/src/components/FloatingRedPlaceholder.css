@@ -1,0 +1,16 @@
+.floating-red-layer { position: fixed; inset: 0; z-index: 5; pointer-events: none; }
+.floating-red-box {
+  position: fixed;
+  left: -9999px; top: -9999px;
+  width: 420px; height: 380px;
+  background: url('https://customer-assets.emergentagent.com/job_webui-transformation/artifacts/7gfwrb7h_image%206345393.jpg') center/cover no-repeat; /* keeps the interactive handoff image */
+  border-radius: 28px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+  opacity: 0;
+  will-change: left, top, width, height, border-radius, opacity;
+  transform: translateZ(0); /* subpixel alignment smoothing */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-red-box { transition: none !important; }
+}
