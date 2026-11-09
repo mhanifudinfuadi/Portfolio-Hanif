@@ -50,8 +50,8 @@ const PreLanding = () => {
       >
         <div className="background-overlay"></div>
         <img 
-          src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=1920&h=1080&fit=crop&q=90" 
-          alt="Narrative Photographer"
+          src="https://images.unsplash.com/photo-1542038888553-782477a416a4?w=1920&h=1080&fit=crop&q=90" 
+          alt="Fotografer dengan kamera Sony Alpha"
           className="landing-image"
         />
       </div>
