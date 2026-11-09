@@ -3,13 +3,26 @@ import './Login.css';
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleGoogleLogin = () => {
     setIsLoading(true);
+    setError(null);
     
-    // REMINDER: DO NOT HARDCODE THE URL, OR ADD ANY FALLBACKS OR REDIRECT URLS, THIS BREAKS THE AUTH
+    // Use current origin for redirect - works on any domain
     const redirectUrl = window.location.origin + '/admin';
     const authUrl = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(redirectUrl)}`;
+    
+    window.location.href = authUrl;
+  };
+
+  const handleEmailLogin = () => {
+    setIsLoading(true);
+    setError(null);
+    
+    // Email/password login via Emergent Auth
+    const redirectUrl = window.location.origin + '/admin';
+    const authUrl = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(redirectUrl)}&provider=email`;
     
     window.location.href = authUrl;
   };
@@ -19,6 +32,8 @@ const Login = () => {
       <div className="login-card">
         <h1 className="login-title">Admin Access</h1>
         <p className="login-subtitle">Sign in to manage your content</p>
+        
+        {error && <div className="login-error">{error}</div>}
         
         <button 
           onClick={handleGoogleLogin}
@@ -36,6 +51,27 @@ const Login = () => {
                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
               </svg>
               Continue with Google
+            </>
+          )}
+        </button>
+        
+        <div className="login-divider">
+          <span>or</span>
+        </div>
+        
+        <button 
+          onClick={handleEmailLogin}
+          disabled={isLoading}
+          className="email-login-btn"
+        >
+          {isLoading ? (
+            <span>Redirecting...</span>
+          ) : (
+            <>
+              <svg className="email-icon" viewBox="0 0 24 24" width="20" height="20">
+                <path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+              Continue with Email
             </>
           )}
         </button>

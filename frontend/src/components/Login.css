@@ -68,6 +68,70 @@
   height: 20px;
 }
 
+.login-error {
+  background: #fed7d7;
+  color: #c53030;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 24px 0;
+  color: #718096;
+  font-size: 14px;
+}
+
+.login-divider::before,
+.login-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.email-login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a202c;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.email-login-btn:hover:not(:disabled) {
+  border-color: #cbd5e0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.email-login-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.email-login-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.email-icon {
+  width: 20px;
+  height: 20px;
+}
+
 @media (max-width: 480px) {
   .login-card {
     padding: 32px 24px;
