@@ -9,6 +9,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
 
   const handleSubmit = async (event) => {
@@ -23,7 +24,12 @@ const Login = () => {
         body: JSON.stringify({ email, password }),
       });
       const result = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(result.detail || 'Tidak dapat masuk. Periksa koneksi lalu coba lagi.');
+      if (!response.ok) {
+        const fallback = response.status >= 500
+          ? 'Server belum terhubung ke database. Coba lagi beberapa saat.'
+          : 'Tidak dapat masuk. Periksa koneksi lalu coba lagi.';
+        throw new Error(result.detail || fallback);
+      }
       navigate('/admin', { replace: true, state: { user: result } });
     } catch (loginError) {
       setError(loginError.message || 'Tidak dapat masuk. Coba lagi.');
@@ -54,18 +60,30 @@ const Login = () => {
         </label>
         <label className="login-field">
           Kata sandi
-          <input
-            type="password"
-            name="password"
-            autoComplete="current-password"
-            minLength={6}
-            maxLength={128}
-            pattern="(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{6,128}"
-            title="Gunakan minimal 6 karakter, dengan huruf dan angka saja."
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            required
-          />
+          <span className="login-password-wrap">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              autoComplete="current-password"
+              minLength={6}
+              maxLength={128}
+              pattern="(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{6,128}"
+              title="Gunakan minimal 6 karakter, dengan huruf dan angka saja."
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              required
+            />
+            <button
+              type="button"
+              className="login-password-toggle"
+              onClick={() => setShowPassword((visible) => !visible)}
+              aria-label={showPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
+              aria-pressed={showPassword}
+              title={showPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
+            >
+              {showPassword ? '🙈' : '👁'}
+            </button>
+          </span>
         </label>
         <button type="submit" disabled={isLoading} className="login-submit-btn">
           {isLoading ? 'Memeriksa…' : 'Masuk ke admin'}

@@ -7,3 +7,8 @@
 .login-submit-btn:hover:not(:disabled){box-shadow:0 8px 24px #667eea59;transform:translateY(-1px)}
 .login-submit-btn:disabled{cursor:not-allowed;opacity:.6}
 .login-security-note{color:#a0aec0;font-size:12px;margin:18px 0 0}
+
+.login-password-wrap{display:block;position:relative}
+.login-password-wrap input{padding-right:46px;width:100%}
+.login-password-toggle{background:none;border:none;cursor:pointer;font-size:16px;line-height:1;padding:6px;position:absolute;right:8px;top:50%;transform:translateY(-50%)}
+.login-password-toggle:focus-visible{outline:2px solid #667eea;outline-offset:2px;border-radius:6px}
