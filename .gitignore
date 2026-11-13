@@ -40,3 +40,7 @@ frontend/build/
 
 # Vercel
 .vercel
+
+# Python
+__pycache__/
+*.pyc
