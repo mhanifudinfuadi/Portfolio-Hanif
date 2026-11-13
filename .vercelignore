@@ -8,3 +8,5 @@ backend/uploads
 .git
 .vercel
 .DS_Store
+.env
+backend/.env
