@@ -298,3 +298,7 @@
 .wd-intro-frame{background:#000;border:1px solid rgba(255,255,255,.12);border-radius:16px;overflow:hidden}
 .wd-intro-video{display:block;height:auto;width:100%}
 @media (max-width:640px){.wd-intro{padding:48px 16px 4px}}
+
+.wd-intro-frame{position:relative}
+.wd-intro-sound{background:rgba(12,12,14,.78);border:1px solid rgba(255,255,255,.18);border-radius:999px;color:#fff;cursor:pointer;font-family:inherit;font-size:12px;padding:8px 14px;position:absolute;right:14px;top:14px;transition:background .2s ease}
+.wd-intro-sound:hover{background:rgba(12,12,14,.92)}

@@ -32,6 +32,9 @@ const WorkDetail = () => {
   const playingRef = useRef(false);
   const offsetRef = useRef(0);
   const trackRef = useRef(null);
+  const videoRef = useRef(null);
+  const introRef = useRef(null);
+  const [videoMuted, setVideoMuted] = useState(true);
 
   useEffect(() => {
     let active = true;
@@ -148,6 +151,39 @@ const WorkDetail = () => {
       audioRef.current = null;
     };
   }, [musicUrl, status]);
+
+  // Putar cuplikan otomatis saat section terlihat, jeda saat keluar layar.
+  useEffect(() => {
+    const video = videoRef.current;
+    const section = introRef.current;
+    if (!video || !section) return undefined;
+
+    video.muted = true;
+    const reduceMotion =
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const play = () => {
+      const attempt = video.play();
+      if (attempt && typeof attempt.catch === 'function') attempt.catch(() => {});
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (!entry) return;
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.45) {
+          if (!reduceMotion) play();
+        } else if (!video.paused) {
+          video.pause();
+        }
+      },
+      { threshold: [0, 0.45, 0.75] }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [videoUrl]);
 
   // Showcase bergulir otomatis ke kanan; kecepatan mengikuti kekuatan nada.
   useEffect(() => {
@@ -299,20 +335,44 @@ const WorkDetail = () => {
       )}
 
       {videoUrl && (
-        <section className="wd-intro">
+        <section className="wd-intro" ref={introRef}>
           <div className="wd-intro-inner">
             <h2 className="wd-section-label">Cuplikan</h2>
-            <p className="wd-intro-note">Teaser pembuka sebelum dokumentasi lengkap.</p>
+            <p className="wd-intro-note">
+              {videoMuted
+                ? 'Tampil otomatis saat section ini terlihat (tanpa suara).'
+                : 'Tampil otomatis dengan suara.'}
+            </p>
             <div className="wd-intro-frame">
               <video
+                ref={videoRef}
                 className="wd-intro-video"
                 src={videoUrl}
                 controls
                 playsInline
+                loop
+                muted={videoMuted}
                 preload="metadata"
               >
                 Browser tidak mendukung pemutaran video.
               </video>
+              <button
+                type="button"
+                className="wd-intro-sound"
+                onClick={() => {
+                  const video = videoRef.current;
+                  if (!video) return;
+                  const next = !videoMuted;
+                  video.muted = next;
+                  setVideoMuted(next);
+                  if (!next) {
+                    const attempt = video.play();
+                    if (attempt && typeof attempt.catch === 'function') attempt.catch(() => {});
+                  }
+                }}
+              >
+                {videoMuted ? '🔇 Nyalakan suara' : '🔊 Bisukan'}
+              </button>
             </div>
           </div>
         </section>
