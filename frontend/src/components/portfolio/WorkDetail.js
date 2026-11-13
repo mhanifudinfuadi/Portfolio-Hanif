@@ -59,6 +59,7 @@ const WorkDetail = () => {
   const isDocumentation = !item?.kind || item.kind === 'documentation' || item.kind === 'media';
   const musicUrl =
     item?.music_url || item?.metadata?.music_url || (isDocumentation ? DEFAULT_MUSIC : '');
+  const videoUrl = item?.intro_video || item?.metadata?.intro_video || '';
   const paragraphs = splitParagraphs(item?.body);
   const summary = item?.description || '';
 
@@ -293,6 +294,26 @@ const WorkDetail = () => {
                 {paragraph}
               </p>
             ))}
+          </div>
+        </section>
+      )}
+
+      {videoUrl && (
+        <section className="wd-intro">
+          <div className="wd-intro-inner">
+            <h2 className="wd-section-label">Cuplikan</h2>
+            <p className="wd-intro-note">Teaser pembuka sebelum dokumentasi lengkap.</p>
+            <div className="wd-intro-frame">
+              <video
+                className="wd-intro-video"
+                src={videoUrl}
+                controls
+                playsInline
+                preload="metadata"
+              >
+                Browser tidak mendukung pemutaran video.
+              </video>
+            </div>
           </div>
         </section>
       )}

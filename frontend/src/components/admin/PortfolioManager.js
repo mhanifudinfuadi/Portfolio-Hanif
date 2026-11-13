@@ -9,7 +9,7 @@ const categories = [
   { kind: 'creative', label: 'Tulisan Kreatif' },
   { kind: 'novel', label: 'Novel Resmi' },
 ];
-const fresh = { title: '', category: '', description: '', body: '', images: [], metadata: {}, published: false, music_url: '' };
+const fresh = { title: '', category: '', description: '', body: '', images: [], metadata: {}, published: false, music_url: '', intro_video: '' };
 
 const PortfolioManager = ({ channel }) => {
   const [kind, setKind] = useState('documentation');
@@ -169,7 +169,7 @@ const PortfolioManager = ({ channel }) => {
   const edit = (item) => {
     setEditing(item.content_id);
     setEditingTitle(item.title || '');
-    setForm({ title: item.title, category: item.category, description: item.description || '', body: item.body || '', images: item.images || [], metadata: item.metadata || {}, published: item.published, music_url: item.music_url || '' });
+    setForm({ title: item.title, category: item.category, description: item.description || '', body: item.body || '', images: item.images || [], metadata: item.metadata || {}, published: item.published, music_url: item.music_url || '', intro_video: item.intro_video || '' });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -254,6 +254,7 @@ const PortfolioManager = ({ channel }) => {
 
       {kind === 'novel' && <div className="portfolio-extra-fields"><label>Jumlah halaman<input value={form.metadata.pages || ''} onChange={(e) => setForm({ ...form, metadata: { ...form.metadata, pages: e.target.value } })} /></label><label>ISBN<input value={form.metadata.isbn || ''} onChange={(e) => setForm({ ...form, metadata: { ...form.metadata, isbn: e.target.value } })} /></label><label>Penerbit<input value={form.metadata.publisher || ''} onChange={(e) => setForm({ ...form, metadata: { ...form.metadata, publisher: e.target.value } })} /></label><label>Tautan pemesanan<input value={form.metadata.order_url || ''} onChange={(e) => setForm({ ...form, metadata: { ...form.metadata, order_url: e.target.value } })} /></label></div>}
       <label>Lagu pengantar (opsional)<input value={form.music_url || ''} placeholder="Kosongkan untuk memakai lagu bawaan, atau isi URL audio" onChange={(e) => setForm({ ...form, music_url: e.target.value })} /></label>
+      <label>Video cuplikan (opsional)<input value={form.intro_video || ''} placeholder="/video/teaser-lamaran-16x9.mp4 atau URL video" onChange={(e) => setForm({ ...form, intro_video: e.target.value })} /></label>
       <label className="portfolio-publish"><input type="checkbox" checked={form.published} onChange={(e) => setForm({ ...form, published: e.target.checked })} /> Tampilkan di portfolio publik</label>
       <div className="portfolio-form-actions"><button className="admin-card-btn admin-card-btn-active" disabled={busy}>{busy ? 'Menyimpan…' : editing ? 'Simpan perubahan' : 'Simpan konten'}</button>{editing && <button type="button" onClick={cancelEdit}>Batal</button>}</div>{notice && <p role="status">{notice}</p>}
     </form>

@@ -291,3 +291,10 @@
     columns: 1;
   }
 }
+
+.wd-intro{padding:72px 24px 8px}
+.wd-intro-inner{margin:0 auto;max-width:1080px}
+.wd-intro-note{color:rgba(255,255,255,.55);font-size:14px;margin:-6px 0 20px}
+.wd-intro-frame{background:#000;border:1px solid rgba(255,255,255,.12);border-radius:16px;overflow:hidden}
+.wd-intro-video{display:block;height:auto;width:100%}
+@media (max-width:640px){.wd-intro{padding:48px 16px 4px}}

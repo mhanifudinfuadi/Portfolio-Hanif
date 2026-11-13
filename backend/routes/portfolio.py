@@ -22,6 +22,7 @@ class ContentInput(BaseModel):
     metadata: dict = {}
     published: bool = False
     music_url: Optional[str] = ""
+    intro_video: Optional[str] = ""
 
 
 @router.get("/content")
