@@ -12,7 +12,7 @@ const JournalSection = () => {
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    fetch(`${BACKEND_URL}/api/articles/?published_only=true`)
+    fetch(`${BACKEND_URL}/api/articles?published_only=true`)
       .then((response) => {
         if (!response.ok) throw new Error('Failed to load');
         return response.json();

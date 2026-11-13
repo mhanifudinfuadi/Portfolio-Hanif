@@ -18,7 +18,7 @@ const ArticlesManager = () => {
   const resolveUrl = (url) => (!url ? '' : url.startsWith('http') ? url : `${API_URL}${url}`);
 
   const loadArticles = async () => {
-    const response = await fetch(`${API_URL}/api/articles/?published_only=false`, { credentials: 'include' });
+    const response = await fetch(`${API_URL}/api/articles?published_only=false`, { credentials: 'include' });
     if (!response.ok) throw new Error('Gagal memuat artikel. Silakan masuk ulang.');
     setArticles(await response.json());
   };
@@ -95,7 +95,8 @@ const ArticlesManager = () => {
     setBusy(true);
     setMessage('');
     try {
-      const response = await fetch(`${API_URL}/api/articles/${editingId ? `${editingId}` : ''}`, {
+      const endpoint = editingId ? `${API_URL}/api/articles/${editingId}` : `${API_URL}/api/articles`;
+      const response = await fetch(endpoint, {
         method: editingId ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

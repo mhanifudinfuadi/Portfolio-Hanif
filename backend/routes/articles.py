@@ -77,6 +77,7 @@ async def upload_article_image(
     return {"image_url": media_url(filename)}
 
 
+@router.post("", response_model=ArticleOut)
 @router.post("/", response_model=ArticleOut)
 async def create_article(request: Request, data: ArticleCreate, user=Depends(get_current_user)):
     db = get_db(request)
@@ -98,6 +99,7 @@ async def create_article(request: Request, data: ArticleCreate, user=Depends(get
     return ArticleOut(**{k: v for k, v in doc.items() if k != "_id"})
 
 
+@router.get("", response_model=List[ArticleOut])
 @router.get("/", response_model=List[ArticleOut])
 async def list_articles(request: Request, published_only: bool = True):
     db = get_db(request)
