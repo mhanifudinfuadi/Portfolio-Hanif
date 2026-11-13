@@ -1,0 +1,293 @@
+.work-detail {
+  background: #fff;
+  color: #1a1a1a;
+  min-height: 100vh;
+}
+
+.wd-hero {
+  border-bottom: 1px solid #eee;
+  padding: 150px 24px 80px;
+}
+
+.wd-hero-inner {
+  margin: 0 auto;
+  max-width: 860px;
+}
+
+.wd-back-link {
+  color: #888;
+  display: inline-block;
+  font-size: 13px;
+  margin-bottom: 28px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.wd-back-link:hover {
+  color: #1a1a1a;
+}
+
+.wd-meta {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.wd-badge {
+  background: #f4f4f4;
+  border-radius: 999px;
+  color: #555;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  padding: 7px 16px;
+  text-transform: uppercase;
+}
+
+.wd-count {
+  color: #999;
+  font-size: 12px;
+}
+
+.wd-title {
+  color: #1a1a1a;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0 0 22px;
+}
+
+.wd-summary {
+  color: #555;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(16px, 2vw, 19px);
+  line-height: 1.8;
+  margin: 0 0 40px;
+}
+
+.wd-player {
+  align-items: center;
+  background: #fafafa;
+  border: 1px solid #ececec;
+  border-radius: 14px;
+  display: flex;
+  gap: 14px;
+  padding: 14px 18px;
+}
+
+.wd-player-btn {
+  align-items: center;
+  background: #1a1a1a;
+  border: none;
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  font-size: 12px;
+  height: 38px;
+  justify-content: center;
+  width: 38px;
+}
+
+.wd-player-btn:hover {
+  background: #333;
+}
+
+.wd-player-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.wd-player-label {
+  color: #999;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.wd-player-title {
+  color: #1a1a1a;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wd-player-state {
+  color: #aaa;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.wd-player-state.is-playing {
+  color: #2f7d4f;
+}
+
+.wd-audio-hint {
+  color: #999;
+  font-size: 12px;
+  margin: 12px 0 0;
+}
+
+.wd-story {
+  padding: 90px 24px;
+}
+
+.wd-story-inner {
+  margin: 0 auto;
+  max-width: 720px;
+}
+
+.wd-section-label {
+  color: #999;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  margin: 0 0 28px;
+  text-transform: uppercase;
+}
+
+.wd-paragraph {
+  color: #333;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 17px;
+  line-height: 1.95;
+  margin: 0 0 24px;
+}
+
+.wd-gallery {
+  border-top: 1px solid #f0f0f0;
+  padding: 90px 24px;
+}
+
+.wd-gallery-head {
+  margin: 0 auto 36px;
+  max-width: 1280px;
+}
+
+.wd-gallery-note {
+  color: #999;
+  font-size: 13px;
+  margin: 8px 0 0;
+}
+
+.wd-grid {
+  columns: 3 260px;
+  column-gap: 18px;
+  margin: 0 auto;
+  max-width: 1280px;
+}
+
+.wd-grid-item {
+  break-inside: avoid;
+  margin: 0 0 18px;
+  overflow: hidden;
+}
+
+.wd-grid-item img {
+  border-radius: 4px;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+
+.wd-grid-item:hover img {
+  transform: scale(1.03);
+}
+
+.wd-marquee {
+  border-top: 1px solid #f0f0f0;
+  overflow: hidden;
+  padding: 90px 0;
+}
+
+.wd-marquee-head {
+  margin: 0 auto 36px;
+  max-width: 1280px;
+  padding: 0 24px;
+}
+
+.wd-marquee-note {
+  color: #999;
+  font-size: 13px;
+  margin: 8px 0 0;
+}
+
+.wd-marquee-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.wd-marquee-track {
+  display: flex;
+  gap: 20px;
+  will-change: transform;
+  width: max-content;
+}
+
+.wd-marquee-item {
+  border-radius: 6px;
+  flex: 0 0 auto;
+  height: 300px;
+  overflow: hidden;
+  width: 420px;
+}
+
+.wd-marquee-item img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+  width: 100%;
+}
+
+.wd-status {
+  margin: 0 auto;
+  max-width: 720px;
+  padding: 220px 24px 120px;
+}
+
+.wd-status h1 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 40px;
+  font-weight: 400;
+  margin: 0 0 14px;
+}
+
+.wd-status p {
+  color: #666;
+  line-height: 1.7;
+}
+
+@media (max-width: 760px) {
+  .wd-hero {
+    padding: 120px 20px 60px;
+  }
+
+  .wd-story,
+  .wd-gallery {
+    padding: 64px 20px;
+  }
+
+  .wd-marquee {
+    padding: 64px 0;
+  }
+
+  .wd-marquee-item {
+    height: 200px;
+    width: 280px;
+  }
+
+  .wd-grid {
+    columns: 1;
+  }
+}

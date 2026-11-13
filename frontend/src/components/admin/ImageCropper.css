@@ -1,0 +1,279 @@
+.cropper-backdrop {
+  align-items: center;
+  background: #0b0b12cc;
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 24px;
+  position: fixed;
+  z-index: 120;
+}
+
+.cropper-modal {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 30px 80px #0000004d;
+  color: #1a1a1a;
+  max-height: 92vh;
+  max-width: 560px;
+  overflow-y: auto;
+  padding: 24px;
+  width: 100%;
+}
+
+.cropper-head {
+  align-items: flex-start;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.cropper-eyebrow {
+  color: #999;
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+
+.cropper-title {
+  color: #1a1a1a;
+  font-family: Georgia, serif;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.cropper-close {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 26px;
+  line-height: 1;
+  padding: 0 4px;
+}
+
+.cropper-close:hover {
+  color: #1a1a1a;
+}
+
+.cropper-stage {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.cropper-frame {
+  background: #f0f0f0;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  cursor: grab;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+  touch-action: none;
+}
+
+.cropper-frame:active {
+  cursor: grabbing;
+}
+
+.cropper-image {
+  left: 0;
+  max-width: none;
+  position: absolute;
+  top: 0;
+  user-select: none;
+}
+
+.cropper-grid {
+  background-image: linear-gradient(#ffffff59 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff59 1px, transparent 1px);
+  background-size: 33.333% 33.333%;
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.cropper-loading {
+  color: #999;
+  font-size: 13px;
+  margin: auto;
+  position: absolute;
+  inset: 0;
+  text-align: center;
+  top: 50%;
+}
+
+.cropper-toolbar {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.cropper-aspects {
+  display: flex;
+  gap: 8px;
+}
+
+.cropper-aspects button {
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+  border-radius: 999px;
+  color: #555;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  padding: 7px 14px;
+  transition: all 0.2s ease;
+}
+
+.cropper-aspects button:hover {
+  border-color: #d5d5d5;
+}
+
+.cropper-aspects button.active {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+  color: #fff;
+}
+
+.cropper-zoom {
+  align-items: center;
+  color: #666;
+  display: flex;
+  font-size: 12px;
+  gap: 10px;
+}
+
+.cropper-zoom input[type='range'] {
+  accent-color: #1a1a1a;
+  width: 130px;
+}
+
+.cropper-zoom-value {
+  color: #999;
+  min-width: 42px;
+  text-align: right;
+}
+
+.cropper-hint {
+  color: #999;
+  font-size: 12px;
+  margin: 0 0 14px;
+}
+
+.cropper-error {
+  background: #fff1f1;
+  border-radius: 8px;
+  color: #c0392b;
+  font-size: 12px;
+  margin: 0 0 14px;
+  padding: 10px 12px;
+}
+
+.cropper-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.cropper-actions button {
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  padding: 12px 24px;
+  transition: all 0.2s ease;
+}
+
+.cropper-cancel {
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+  color: #555;
+}
+
+.cropper-cancel:hover {
+  border-color: #d5d5d5;
+}
+
+.cropper-confirm {
+  background: #1a1a1a;
+  border: 1px solid #1a1a1a;
+  color: #fff;
+}
+
+.cropper-confirm:hover:not(:disabled) {
+  background: #333;
+}
+
+.cropper-confirm:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+@media (max-width: 620px) {
+  .cropper-modal {
+    padding: 18px;
+  }
+
+  .cropper-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .cropper-actions {
+    flex-direction: column;
+  }
+
+  .cropper-actions button {
+    width: 100%;
+  }
+}.cropper-modal {
+  display: flex;
+  flex-direction: column;
+}
+
+.cropper-stage,
+.cropper-toolbar,
+.cropper-hint,
+.cropper-error {
+  flex: 0 0 auto;
+}
+
+.cropper-actions {
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+}
+
+.cropper-skip {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  color: #555;
+}
+
+.cropper-skip:hover:not(:disabled) {
+  border-color: #1a1a1a;
+  color: #1a1a1a;
+}
+
+.cropper-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+@media (max-width: 620px) {
+  .cropper-actions {
+    flex-direction: column;
+  }
+
+  .cropper-actions button {
+    width: 100%;
+  }
+}

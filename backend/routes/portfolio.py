@@ -22,6 +22,7 @@ class ContentInput(BaseModel):
     images: list[str] = []
     metadata: dict = {}
     published: bool = False
+    music_url: Optional[str] = ""
 
 
 @router.get("/content")
@@ -32,6 +33,16 @@ async def list_content(request: Request, kind: Optional[str] = None, published_o
     if kind:
         query["kind"] = kind
     return await request.app.state.db.portfolio_content.find(query, {"_id": 0}).sort("updated_at", -1).to_list(2000)
+
+
+@router.get("/content/{content_id}")
+async def get_content(request: Request, content_id: str):
+    doc = await request.app.state.db.portfolio_content.find_one({"content_id": content_id}, {"_id": 0})
+    if not doc:
+        raise HTTPException(status_code=404, detail="Konten tidak ditemukan")
+    if not doc.get("published"):
+        await get_current_user(request, request.cookies.get("session_token"))
+    return doc
 
 
 @router.post("/content")

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>hanif® — Narrative Photographer & Writer Portfolio</title>
+  <meta name="description" content="Visual storytelling through photography, poetry, essays, and published novels." />
+
+  <!-- Preload fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <!-- Custom CSS for immediate rendering -->
+  <style>
+    /* Base styles */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #fafaf9;
+      font-family: 'Georgia', serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Typography scale */
+    h1, h2, h3 {
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    h1 { font-size: clamp(56px, 9vw, 96px); }
+    h2 { font-size: clamp(48px, 7vw, 72px); }
+    h3 { font-size: clamp(32px, 5vw, 48px); }
+
+    /* Smooth scrolling */
+    html { scroll-behavior: smooth; }
+
+    /* Loading indicator */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: #fafaf9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .loading-text {
+      font-size: clamp(32px, 5vw, 48px);
+      color: #1a1a1a;
+    }
+  </style>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Simple Loading Indicator -->
+  <div id="loader">
+    <h1 class="loading-text">hanif®</h1>
+    <span style="margin-top: 20px; color: #666;">Loading Portfolio...</span>
+  </div>
+
+  <!-- Main Content - Simple HTML version for immediate display -->
+  <div id="app" style="display: contents;">
+
+    <!-- PreLanding Section -->
+    <section class="pre-landing">
+      <div class="hero-overlay" style="position: fixed; inset: 0; background: rgba(250, 250, 249, 0.8); opacity: 0; transition: all 0.3s ease;"></div>
+
+      <div class="content">
+        <!-- Logo -->
+        <h1 style="font-family: 'Georgia', serif; font-size: clamp(48px, 7vw, 72px); color: #1a1a1a; margin-bottom: 30px;">hanif®</h1>
+
+        <!-- Subtitle -->
+        <p style="font-family: 'Georgia', serif; font-size: 19px; color: #666; max-width: 60ch; line-height: 1.7;">Narrative Photographer & Writer Portfolio</p>
+
+        <!-- Scroll Indicator -->
+        <div style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);">
+          <span style="color: #666; font-family: 'Georgia', serif;">↓ next chapter →</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Navigation -->
+    <nav class="portfolio-nav" style="position: fixed; top: 0; left: 0; right: 0; background: rgba(250, 250, 249, 0.8); z-index: 1000;">
+      <div class="nav-links" style="display: flex; gap: 40px; padding: 20px 40px; border-bottom: none;">
+        <a href="#works" style="font-family: 'Georgia', serif; text-decoration: none; color: #555;">Karya</a>
+        <a href="#journal" style="font-family: 'Georgia', serif; text-decoration: none; color: #555;">Catatan</a>
+        <a href="#about" style="font-family: 'Georgia', serif; text-decoration: none; color: #555;">Tentang</a>
+        <a href="#contact" style="font-family: 'Georgia', serif; text-decoration: none; color: #555;">Kontak</a>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="portfolio-hero">
+      <h2 style="font-family: 'Georgia', serif; font-size: clamp(48px, 6vw, 70px); color: #1a1a1a;">Visual Storytelling</h2>
+      <p style="font-family: 'Georgia', serif; font-size: 19px; color: #666;">Photography. Poetry. Essays. Published Works.</p>
+    </section>
+
+    <!-- Works Grid Section -->
+    <section class="works-section">
+      <h3 style="color: #1a1a1a; margin-bottom: 20px;">Selected Works</h3>
+
+      <div class="filter-bar" style="display: flex; gap: 16px; margin-bottom: 40px;">
+        <span style="background: rgba(26,26,26,0.05); padding: 10px 24px; color: #999;">All Works</span>
+      </div>
+
+      <div class="projects-grid" style="display: grid; gap: 80px;">
+        <!-- Sample works -->
+        <div style="background: #fafaf9; border-radius: 16px; overflow: hidden;">
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&h=800&fit=crop" alt="Urban Chronicles">
+          <div style="padding: 24px;">
+            <span style="color: #999; font-size: 12px; letter-spacing: 1.5px;">Fotografi</span>
+            <h3 style="font-family: 'Georgia', serif; font-size: 32px; color: #1a1a1a; margin-top: 8px;">Urban Chronicles</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Novels Section -->
+    <section class="novel-section">
+      <h3 style="text-align: center; color: #1a1a1a;">Published Books</h3>
+
+      <div style="display: grid; gap: 80px; margin-top: 40px;">
+        <!-- Novel cards as simple HTML -->
+        <div style="background: #fafaf9; padding: 24px; border-radius: 12px;">
+          <h3 style="font-family: 'Georgia', serif; font-size: 36px; color: #1a1a1a;">Manuscript Langit</h3>
+          <p style="color: #777;">Fiksi Psikologis / Eksistensial - 342 pages • 2024</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Journal Section -->
+    <section class="journal-section">
+      <h3 style="text-align: center; color: #1a1a1a;">Written Works</h3>
+
+      <div style="margin-top: 40px; max-width: 720px; margin-left: auto; margin-right: auto;">
+        <p style="font-family: 'Georgia', serif; font-size: 19px; color: #555; line-height: 1.8; max-width: 60ch;">
+          Tulisan sebagai ekspresi dari perjalanan. Dari catatan harian, sajak, hingga esai filosofis.
+        </p>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+      <h3 style="color: #1a1a1a;">About Hansfuadi</h3>
+      <p style="font-family: 'Georgia', serif; font-size: 20px; color: #444;">NARRATIVE PHOTOGRAPHER & WRITER</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+      <h3 style="color: #1a1a1a; margin-bottom: 24px;">Get In Touch</h3>
+
+      <form style="max-width: 500px;">
+        <label>Name</label>
+        <input type="text" placeholder="Your name" style="width: 100%; padding: 20px; background: #fafaf9; border-radius: 8px; margin-bottom: 16px;">
+
+        <label>Email</label>
+        <input type="email" placeholder="your@email.com" style="width: 100%; padding: 20px; background: #fafaf9; border-radius: 8px; margin-bottom: 16px;">
+
+        <textarea
+          placeholder="Your message"
+          style="width: 100%; min-height: 150px; padding: 20px; background: #fafaf9; border-radius: 8px; margin-bottom: 24px;"
+        ></textarea>
+
+        <button type="submit" style="background: #1a1a1a; color: #ffffff; padding: 20px 40px; border-radius: 50px; font-family: 'Georgia', serif;">Send Message</button>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #fafaf9; text-align: center; padding: 40px;">
+      <h2 style="font-family: 'Georgia', serif; font-size: 24px; color: #1a1a1a;">hanif®</h2>
+      <p style="color: #999; font-family: 'Georgia', serif; font-size: 14px;">© 2024 - All Rights Reserved</p>
+    </footer>
+  </div>
+
+  <!-- Script to hide loader -->
+  <script>
+    // Hide loader after 2 seconds or when content loads
+    setTimeout(function() {
+      document.getElementById('loader').style.opacity = '0';
+      setTimeout(function() {
+        document.getElementById('loader').style.display = 'none';
+      }, 500);
+    }, 2000);
+  </script>
+
+</body>
+</html>

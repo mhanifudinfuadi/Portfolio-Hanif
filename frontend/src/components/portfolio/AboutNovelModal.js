@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { createPortal } from 'react-dom';
 import './AboutNovelModal.css';
 
 const AboutNovelModal = ({ isOpen, onClose }) => {
@@ -80,7 +81,7 @@ Karena pada akhirnya, setiap orang berhak memiliki tempat untuk pulang. Dan seti
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <AnimatePresence>
       <motion.div 
         className="about-modal-overlay"
@@ -288,7 +289,8 @@ Karena pada akhirnya, setiap orang berhak memiliki tempat untuk pulang. Dan seti
           </div>
         </motion.div>
       </motion.div>
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 

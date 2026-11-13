@@ -3,12 +3,23 @@ import './PortfolioNav.css';
 
 const PortfolioNav = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('about');
 
+  // Define navigation links explicitly
+  const navLinks = [
+    { text: 'Karya', href: '#works' },
+    { text: 'Catatan', href: '#journal' },
+    { text: 'Tentang', href: '#about' },
+    { text: 'Kontak', href: '#contact' }
+  ];
+
+  // Scroll tracking effect
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+
+      // Find current active section
       const marker = window.scrollY + window.innerHeight * 0.36;
       const orderedSections = ['about', 'works', 'journal', 'contact'];
       const current = orderedSections.reduce((activeId, id) => {
@@ -17,38 +28,35 @@ const PortfolioNav = () => {
       }, 'about');
       setActiveSection(current);
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { text: 'Karya', href: '#works' },
-    { text: 'Catatan', href: '#journal' },
-    { text: 'Tentang', href: '#about' },
-    { text: 'Kontak', href: '#contact' }
-  ];
-
   return (
     <nav className={`portfolio-nav ${isScrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
+        {/* Brand Logo */}
         <a href="#" className="nav-brand">hanif®</a>
-        
-        <div className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
+
+        {/* Navigation Links */}
+        <div className={`nav-links ${mobileMenuOpen ? 'mobile-open' : ''}`}>
           {navLinks.map((link, index) => (
-            <a 
+            <a
               key={index}
-              href={link.href} 
+              href={link.href}
               className={`nav-link ${activeSection === link.href.slice(1) ? 'active' : ''}`}
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={() => setMobileMenuOpen(false)}
             >
               {link.text}
             </a>
           ))}
         </div>
-        
-        <button 
-          className={`nav-mobile-toggle ${isMobileMenuOpen ? 'open' : ''}`}
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+
+        {/* Mobile Menu Toggle */}
+        <button
+          className={`nav-mobile-toggle ${mobileMenuOpen ? 'open' : ''}`}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >
           <span></span>

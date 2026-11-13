@@ -1,0 +1,11 @@
+{
+  "name": "web-porto-hanif",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --dir frontend run dev",
+    "start": "pnpm --dir frontend run dev",
+    "build": "pnpm --dir frontend run build",
+    "install:all": "pnpm --dir frontend install"
+  }
+}

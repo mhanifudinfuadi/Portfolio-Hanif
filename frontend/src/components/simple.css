@@ -1,0 +1,46 @@
+/* Simple Fallback Styles - No external dependencies */
+
+/* Base reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Typography scale */
+body {
+  font-family: 'Georgia', serif;
+  background: #fafaf9;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Simple animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Grid system */
+.grid-container {
+  display: grid;
+  gap: 24px;
+}
