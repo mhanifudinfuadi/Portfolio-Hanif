@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm --dir frontend run dev",
+    "dev": "sh -c '(cd backend && venv/bin/python -m uvicorn server:app --host 0.0.0.0 --port 8001) & pnpm --dir frontend run dev'",
     "start": "pnpm --dir frontend run dev",
     "build": "pnpm --dir frontend run build",
-    "install:all": "pnpm --dir frontend install"
+    "install:all": "pnpm --dir frontend install",
+    "dev:frontend": "pnpm --dir frontend run dev",
+    "dev:backend": "cd backend && venv/bin/python -m uvicorn server:app --host 0.0.0.0 --port 8001"
   }
 }
