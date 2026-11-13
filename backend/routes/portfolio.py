@@ -10,8 +10,6 @@ from routes.auth import get_current_user, get_db
 from storage import media_url, save_upload
 
 router = APIRouter(prefix="/portfolio", tags=["portfolio"])
-UPLOAD_DIR = Path(__file__).parent.parent / "uploads"
-UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 ALLOWED_KINDS = {"documentation", "creative", "novel", "media"}
 
 

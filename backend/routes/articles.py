@@ -15,8 +15,6 @@ router = APIRouter(prefix="/articles", tags=["articles"])
 
 # Upload directory (relative to this file -> backend/uploads)
 BASE_DIR = Path(__file__).parent.parent
-UPLOAD_DIR = BASE_DIR / "uploads"
-UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def get_db(request: Request) -> AsyncIOMotorDatabase:
