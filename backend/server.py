@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
+import asyncio
 import logging
 from pathlib import Path
 from pydantic import BaseModel, Field
@@ -22,7 +23,7 @@ from routes.portfolio import router as portfolio_router
 
 # MongoDB connection
 mongo_url = os.environ.get('MONGO_URL', '').strip()
-client = AsyncIOMotorClient(mongo_url) if mongo_url else None
+client = AsyncIOMotorClient(mongo_url, serverSelectionTimeoutMS=8000) if mongo_url else None
 db = client[os.environ.get('DB_NAME', 'portfolio')] if client else None
 
 # Create the main app
@@ -129,6 +130,13 @@ async def ensure_security_indexes():
     if not db_ready:
         logger.warning("MONGO_URL belum diset; endpoint database akan menjawab 503")
         return
+    try:
+        await asyncio.wait_for(_create_security_indexes(), timeout=10)
+    except Exception as exc:  # never block the app when the database is unreachable
+        logger.warning("Gagal membuat index keamanan: %s", exc)
+
+
+async def _create_security_indexes():
     await db.user_sessions.create_index("expires_at", expireAfterSeconds=0)
     await db.auth_login_attempts.create_index("expires_at", expireAfterSeconds=0)
 
