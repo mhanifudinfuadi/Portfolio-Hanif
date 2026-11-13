@@ -6,7 +6,8 @@ import uuid
 
 from fastapi import APIRouter, Depends, File, HTTPException, Request, UploadFile
 from pydantic import BaseModel
-from routes.auth import get_current_user
+from routes.auth import get_current_user, get_db
+from storage import media_url, save_upload
 
 router = APIRouter(prefix="/portfolio", tags=["portfolio"])
 UPLOAD_DIR = Path(__file__).parent.parent / "uploads"
@@ -72,7 +73,12 @@ async def delete_content(request: Request, content_id: str, user=Depends(get_cur
 
 
 @router.post("/upload")
-async def upload_media(files: list[UploadFile] = File(...), user=Depends(get_current_user)):
+async def upload_media(
+    request: Request,
+    files: list[UploadFile] = File(...),
+    user=Depends(get_current_user),
+):
+    db = get_db(request)
     results = []
     for file in files:
         if not file.content_type or not file.content_type.startswith("image/"):
@@ -81,9 +87,8 @@ async def upload_media(files: list[UploadFile] = File(...), user=Depends(get_cur
         if ext not in {".jpg", ".jpeg", ".png", ".webp", ".gif"}:
             raise HTTPException(status_code=400, detail="Format gambar tidak didukung")
         filename = f"{uuid.uuid4().hex}{ext}"
-        with (UPLOAD_DIR / filename).open("wb") as output:
-            shutil.copyfileobj(file.file, output)
-        results.append({"url": f"/uploads/{filename}", "name": file.filename})
+        await save_upload(db, filename, await file.read())
+        results.append({"url": media_url(filename), "name": file.filename})
     return results
 
 

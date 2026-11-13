@@ -8,7 +8,8 @@ import uuid
 import os
 import shutil
 from pathlib import Path
-from routes.auth import get_current_user
+from routes.auth import get_current_user, get_db
+from storage import media_url, save_upload
 
 router = APIRouter(prefix="/articles", tags=["articles"])
 
@@ -61,7 +62,9 @@ def make_slug(title: str) -> str:
 
 
 @router.post("/upload-image")
-async def upload_article_image(file: UploadFile = File(...), user=Depends(get_current_user)):
+async def upload_article_image(
+    request: Request, file: UploadFile = File(...), user=Depends(get_current_user)
+):
     """Upload an article cover image. Returns the public URL path."""
     if not file.content_type or not file.content_type.startswith("image/"):
         raise HTTPException(status_code=400, detail="File must be an image")
@@ -71,11 +74,9 @@ async def upload_article_image(file: UploadFile = File(...), user=Depends(get_cu
         ext = ".jpg"
 
     filename = f"{uuid.uuid4().hex}{ext}"
-    dest = UPLOAD_DIR / filename
-    with dest.open("wb") as out:
-        shutil.copyfileobj(file.file, out)
+    await save_upload(get_db(request), filename, await file.read())
 
-    return {"image_url": f"/uploads/{filename}"}
+    return {"image_url": media_url(filename)}
 
 
 @router.post("/", response_model=ArticleOut)

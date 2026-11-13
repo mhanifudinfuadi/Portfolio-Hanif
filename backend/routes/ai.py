@@ -1,7 +1,11 @@
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
-from emergentintegrations.llm.chat import LlmChat, UserMessage, TextDelta, StreamDone
+try:
+    from emergentintegrations.llm.chat import LlmChat, UserMessage, TextDelta, StreamDone
+except ImportError:  # package is not published on PyPI; AI helper is optional
+    LlmChat = UserMessage = TextDelta = StreamDone = None
+
 import os
 from typing import Optional
 
@@ -22,8 +26,8 @@ async def generate_project_description(request: DescriptionRequest):
     Generate AI-powered project description for portfolio items.
     Streams the response using GPT 6 Sol.
     """
-    if not EMERGENT_LLM_KEY:
-        raise HTTPException(status_code=500, detail="AI service not configured")
+    if not EMERGENT_LLM_KEY or LlmChat is None:
+        raise HTTPException(status_code=503, detail="AI service not configured")
     
     # Create system message based on project type
     if request.project_type == "photography":
@@ -81,8 +85,8 @@ async def generate_batch_descriptions(projects: list[DescriptionRequest]):
     Generate descriptions for multiple projects.
     Returns array of generated descriptions.
     """
-    if not EMERGENT_LLM_KEY:
-        raise HTTPException(status_code=500, detail="AI service not configured")
+    if not EMERGENT_LLM_KEY or LlmChat is None:
+        raise HTTPException(status_code=503, detail="AI service not configured")
     
     results = []
     

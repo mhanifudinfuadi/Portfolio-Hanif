@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException, Request
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -21,22 +21,38 @@ from routes.articles import router as articles_router
 from routes.portfolio import router as portfolio_router
 
 # MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+mongo_url = os.environ.get('MONGO_URL', '').strip()
+client = AsyncIOMotorClient(mongo_url) if mongo_url else None
+db = client[os.environ.get('DB_NAME', 'portfolio')] if client else None
 
 # Create the main app
 app = FastAPI()
 
 # Store db in app state for route access
 app.state.db = db
+db_ready = db is not None
 
-# Static file serving for uploaded assets (images)
+# Static file serving for uploaded assets (images).
+# On Vercel the filesystem is read-only, so uploads live in MongoDB and are
+# streamed through the /uploads and /api/media routes below.
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import JSONResponse, Response
+
+import storage
 
 UPLOAD_DIR = Path(__file__).parent / "uploads"
-UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
-app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
+if not storage.use_db_storage():
+    UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+    app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
+
+
+@app.get("/uploads/{filename}")
+@app.get("/api/media/{filename}")
+async def serve_upload(filename: str):
+    data, content_type = await storage.load_upload(app.state.db, filename)
+    if data is None:
+        raise HTTPException(status_code=404, detail="Media tidak ditemukan")
+    return Response(content=data, media_type=content_type)
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
@@ -98,11 +114,26 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+@app.middleware("http")
+async def database_guard(request: Request, call_next):
+    if not db_ready and request.url.path.startswith("/api"):
+        return JSONResponse(
+            status_code=503,
+            content={"detail": "Database belum dikonfigurasi (MONGO_URL belum diset)"},
+        )
+    return await call_next(request)
+
+
 @app.on_event("startup")
 async def ensure_security_indexes():
+    if not db_ready:
+        logger.warning("MONGO_URL belum diset; endpoint database akan menjawab 503")
+        return
     await db.user_sessions.create_index("expires_at", expireAfterSeconds=0)
     await db.auth_login_attempts.create_index("expires_at", expireAfterSeconds=0)
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
+    if client is not None:
+        client.close()
     client.close()

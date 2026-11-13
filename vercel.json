@@ -3,7 +3,20 @@
   "installCommand": "cd frontend && yarn install --frozen-lockfile",
   "buildCommand": "cd frontend && CI=false yarn build",
   "outputDirectory": "frontend/build",
+  "functions": {
+    "api/index.py": {
+      "maxDuration": 60
+    }
+  },
   "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/uploads/:path*",
+      "destination": "/api/index"
+    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
