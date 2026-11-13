@@ -77,10 +77,16 @@ api_router.include_router(portfolio_router)
 # Then include the api_router in the main app
 app.include_router(api_router)
 
+allowed_origins = [
+    origin.strip()
+    for origin in os.getenv("FRONTEND_ORIGINS", "http://localhost:3000").split(",")
+    if origin.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=["http://localhost:3000", "https://*.vercel.app", "https://*.railway.app", "https://*.render.com", "https://*.fly.dev"],
+    allow_origins=allowed_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -91,6 +97,11 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+@app.on_event("startup")
+async def ensure_security_indexes():
+    await db.user_sessions.create_index("expires_at", expireAfterSeconds=0)
+    await db.auth_login_attempts.create_index("expires_at", expireAfterSeconds=0)
 
 @app.on_event("shutdown")
 async def shutdown_db_client():

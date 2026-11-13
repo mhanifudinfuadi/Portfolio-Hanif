@@ -14,7 +14,7 @@ class User(BaseModel):
 
 class UserSession(BaseModel):
     user_id: str
-    session_token: str
+    session_token_hash: str
     expires_at: datetime
     created_at: Optional[datetime] = None
 
