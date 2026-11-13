@@ -1,13 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './AboutSection.css';
 
+const API = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+const START_YEAR = 2025;
+
+const INITIAL_STATS = [
+  { value: '0', label: 'Foto terpublikasi' },
+  { value: '1', label: 'Tahun berkarya' },
+  { value: '0', label: 'Karya tulis' },
+  { value: '0', label: 'Jumlah karya' }
+];
+
 const AboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [aboutText, setAboutText] = useState('');
+  const [stats, setStats] = useState(INITIAL_STATS);
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/portfolio/settings`).then((response) => response.json()).then((settings) => setAboutText(settings.about_text || '')).catch(() => {});
+    fetch(`${API}/api/portfolio/settings`).then((response) => response.json()).then((settings) => setAboutText(settings.about_text || '')).catch(() => {});
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -24,12 +35,46 @@ const AboutSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  const stats = [
-    { value: '200+', label: 'Foto terpublikasi' },
-    { value: '08', label: 'Tahun berkarya' },
-    { value: '12', label: 'Karya tulis' },
-    { value: '∞', label: 'Cerita untuk ditulis' }
-  ];
+  // Hitung statistik dari data yang benar-benar terpublikasi.
+  useEffect(() => {
+    let active = true;
+
+    const loadStats = async () => {
+      try {
+        const [contentResponse, articlesResponse] = await Promise.all([
+          fetch(`${API}/api/portfolio/content?published_only=true`),
+          fetch(`${API}/api/articles?published_only=true`)
+        ]);
+        const content = contentResponse.ok ? await contentResponse.json() : [];
+        const articles = articlesResponse.ok ? await articlesResponse.json() : [];
+        if (!active || !Array.isArray(content)) return;
+
+        const photoCount = content.reduce(
+          (total, item) => total + ((item.images && item.images.length) || 0),
+          0
+        );
+        const novelCount = content.filter((item) => item.kind === 'novel').length;
+        const essayCount =
+          content.filter((item) => item.kind === 'creative').length +
+          (Array.isArray(articles) ? articles.length : 0);
+        const yearCount = Math.max(1, new Date().getFullYear() - START_YEAR + 1);
+
+        setStats([
+          { value: String(photoCount), label: 'Foto terpublikasi' },
+          { value: String(yearCount), label: 'Tahun berkarya' },
+          { value: String(novelCount + essayCount), label: 'Karya tulis' },
+          { value: String(content.length + (Array.isArray(articles) ? articles.length : 0)), label: 'Jumlah karya' }
+        ]);
+      } catch (error) {
+        // biarkan angka awal bila API tidak terjangkau
+      }
+    };
+
+    loadStats();
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return (
     <section 

@@ -94,12 +94,12 @@ const Novel3DShowcase = () => {
       novel?.body ||
       'Sebuah novel yang mengisahkan perjalanan spiritual seorang anak dalam memahami makna pengorbanan, kasih sayang, dan doa seorang ibu. Narasi yang menyentuh hati dengan prosa yang dalam, mengajak pembaca merenung tentang ikatan batin antara ibu dan anak.',
     specs: [
-      { label: 'Halaman', value: novel?.metadata?.pages || '384' },
+      { label: 'Halaman', value: novel?.metadata?.pages || '150+' },
       { label: 'Tahun', value: '2026' },
       { label: 'Genre', value: novel?.category || 'Fiksi Religi' },
       { label: 'Bahasa', value: 'Indonesia' },
       { label: 'ISBN', value: novel?.metadata?.isbn || '978-xxx-xxxx' },
-      { label: 'Penerbit', value: novel?.metadata?.publisher || 'Hanif Publishing' },
+      { label: 'Penerbit', value: novel?.metadata?.publisher || 'maghzapustaka' },
     ],
     price: 'Rp 135.000',
     orderUrl: novel?.metadata?.order_url || '#contact',

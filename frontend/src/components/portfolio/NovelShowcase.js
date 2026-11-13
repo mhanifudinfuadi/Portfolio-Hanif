@@ -29,7 +29,7 @@ const NovelShowcase = () => {
     tagline: 'Kisah tentang pencarian jati diri di tengah hiruk pikuk modernitas',
     description: 'Novel perdana yang mengisahkan perjalanan seorang pemuda dalam mencari makna hidup di kota besar. Ditulis dengan prosa puitis yang mengalir, mengajak pembaca merenungkan esensi keberadaan dan keindahan dalam kesederhanaan.',
     details: {
-      pages: '384 halaman',
+      pages: '150+ halaman',
       year: '2026',
       genre: 'Fiksi Kontemporer'
     },
